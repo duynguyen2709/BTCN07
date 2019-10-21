@@ -110,3 +110,15 @@ ol, ul {
   text-align: center;
   width: 500px;
 }
+
+.center {
+  top:50%;
+  left: 50%;
+  transform: translate3d(-50%,-50%, 0);
+  position: absolute;
+}
+
+.horizontal-center {
+  left: 50%;
+  transform: translate3d(-50%,0%, 0);
+}
