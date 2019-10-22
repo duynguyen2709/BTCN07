@@ -3,7 +3,7 @@ import * as React from 'react';
 import 'antd/dist/antd.css';
 import '../index.css';
 
-class LoginForm extends React.Component {
+class RegisterForm extends React.Component {
 
     render() {
         return <Row type="flex" justify="center">
@@ -13,7 +13,7 @@ class LoginForm extends React.Component {
                         textAlign: 'center',
                         color: '#464646'
                     }}>
-                        ĐĂNG NHẬP
+                        ĐĂNG KÝ TÀI KHOẢN
                     </h1>
                     <Input
                         style={{marginBottom: 12}}
@@ -30,20 +30,26 @@ class LoginForm extends React.Component {
                         type="password"
                         placeholder="Password"
                     />
-
+                    <Input
+                        style={{marginBottom: 12}}
+                        className="form-group"
+                        prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                        type="password"
+                        placeholder="Retype Password"
+                    />
                     <Button
                         type="primary"
                         htmlType="submit"
                         className="login-form-button horizontal-center"
                     >
-                        Đăng Nhập
+                        Đăng Ký
                     </Button>
 
                     <div style={{
                         textAlign: 'center',
                         marginTop: '10px'
                     }}>
-                        <a href="#">Đăng Ký Tài Khoản</a>
+                        <a href="#">Quay Lại Trang Đăng Nhập</a>
                     </div>
                 </Form>
             </Col>
@@ -51,6 +57,6 @@ class LoginForm extends React.Component {
     }
 }
 
-const WrappedLoginForm = Form.create({name: 'normal_login'})(LoginForm);
+const WrappedRegisterForm = Form.create({name: 'normal_register'})(RegisterForm);
 
-export default WrappedLoginForm;
+export default WrappedRegisterForm;

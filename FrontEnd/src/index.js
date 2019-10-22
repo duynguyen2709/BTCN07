@@ -2,7 +2,8 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WrappedNormalLoginForm from './components/LoginForm';
+import WrappedLoginForm from './components/LoginForm';
+import WrappedRegisterForm from './components/RegisterForm';
 
 import rootReducer from './reducers/RootReducer';
 import GameContainer from './containers/GameContainer';
@@ -13,5 +14,5 @@ import GameContainer from './containers/GameContainer';
 //                   <GameContainer />
 //                 </Provider>,
 //                 document.getElementById('root'));
-ReactDOM.render(<WrappedNormalLoginForm />,
+ReactDOM.render(<WrappedRegisterForm />,
                 document.getElementById('root'));
