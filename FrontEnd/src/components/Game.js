@@ -62,7 +62,7 @@ class Game extends React.Component {
           height:'100%',
           fontSize: '20px'
         }}>
-          Quay Lại Trang Chủ
+          {"\u003C"}=  Quay Lại Trang Chủ
         </a>
         <div className="game">
           <div className="game-board">

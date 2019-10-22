@@ -5,14 +5,14 @@ import Game from '../components/Game';
 
 function mapStateToProps(state) {
   return {
-    BASE_ROW: state.baseRow,
-    BASE_COL: state.baseColumn,
+    BASE_ROW: state.root.baseRow,
+    BASE_COL: state.root.baseColumn,
 
-    squares: state.squares,
-    isXNext: state.isXNext,
-    totalChecked: state.totalChecked,
-    win: state.win,
-    currentSelected: state.currentSelected,
+    squares: state.root.squares,
+    isXNext: state.root.isXNext,
+    totalChecked: state.root.totalChecked,
+    win: state.root.win,
+    currentSelected: state.root.currentSelected,
   };
 }
 

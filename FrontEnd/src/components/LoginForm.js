@@ -1,56 +1,65 @@
-import {Button, Col, Form, Icon, Input, Row} from 'antd';
-import * as React from 'react';
+import {Button, Col, Icon, Input, Row} from 'antd';
+import React, {useState} from 'react';
 import 'antd/dist/antd.css';
 import '../index.css';
 
-class LoginForm extends React.Component {
+const LoginForm = ({errorText, onClickLogin}) => {
 
-    render() {
-        return <Row type="flex" justify="center">
-            <Col span={6} className="center">
-                <Form>
-                    <h1 style={{
-                        textAlign: 'center',
-                        color: '#464646'
-                    }}>
-                        ĐĂNG NHẬP
-                    </h1>
-                    <Input
-                        style={{marginBottom: 12}}
-                        prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                        name="username"
-                        type="text"
-                        placeholder="Username"
-                    />
-                    <Input
-                        style={{marginBottom: 12}}
-                        className="form-group"
-                        prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                    />
+    const [username, setUserName] = useState('');
+    const [password, setPassword] = useState('');
 
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        className="login-form-button horizontal-center"
-                    >
-                        Đăng Nhập
-                    </Button>
+    return <Row type="flex" justify="center">
+        <Col span={6} className="center">
+            <div>
+                <h1 style={{
+                    textAlign: 'center',
+                    color: '#464646'
+                }}>
+                    ĐĂNG NHẬP
+                </h1>
 
-                    <div style={{
-                        textAlign: 'center',
-                        marginTop: '10px'
-                    }}>
-                        <a href="#">Đăng Ký Tài Khoản</a>
-                    </div>
-                </Form>
-            </Col>
-        </Row>
-    }
-}
+                {errorText != null && errorText.toString() !== '' ?
+                    <p style={{textAlign: 'center', color: 'red'}}>{errorText}</p>
+                    : null}
 
-const WrappedLoginForm = Form.create({name: 'normal_login'})(LoginForm);
+                <Input
+                    style={{marginBottom: 12}}
+                    prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                    name="username"
+                    value={username}
+                    onChange={(e) => setUserName(e.target.value)}
+                    type="text"
+                    placeholder="Username"
+                />
+                <Input
+                    style={{marginBottom: 12}}
+                    className="form-group"
+                    prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                    name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                    placeholder="Password"
+                />
 
-export default WrappedLoginForm;
+                <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="login-form-button horizontal-center"
+                    onClick={() => onClickLogin(username, password)}
+                >
+                    Đăng Nhập
+                </Button>
+
+                <div style={{
+                    textAlign: 'center',
+                    marginTop: '10px'
+                }}>
+                    <a href="/register">Đăng Ký Tài Khoản</a>
+                </div>
+            </div>
+        </Col>
+    </Row>
+};
+
+export default LoginForm;

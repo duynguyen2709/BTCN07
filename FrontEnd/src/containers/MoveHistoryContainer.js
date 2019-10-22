@@ -4,8 +4,8 @@ import MoveHistory from '../components/MoveHistory';
 
 function mapStateToProps(state) {
   return {
-    data : state.historyMoves,
-    currentSelected : state.currentSelected,
+    data : state.root.historyMoves,
+    currentSelected : state.root.currentSelected,
   };
 }
 

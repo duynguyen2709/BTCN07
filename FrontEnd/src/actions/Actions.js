@@ -6,6 +6,13 @@ function setCurrentSelected(value) {
     value
   }
 }
+
+function setError(value) {
+  return {
+    type: ActionConstant.SET_ERROR,
+    value
+  }
+}
 function initBoard() {
   return {
     type: ActionConstant.INIT_BOARD
