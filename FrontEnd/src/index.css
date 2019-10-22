@@ -47,7 +47,7 @@ ol, ul {
 
 .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: start;
   margin-left: 100px;
 }
@@ -56,6 +56,7 @@ ol, ul {
   display: flex;
   flex-direction: row;
   overflow: hidden;
+  margin-top: 30px;
 }
 
 .game-board {
@@ -66,14 +67,13 @@ ol, ul {
 .game-info {
   font-size: 48px;
   color: #424242;
-  margin: -50px auto;
+  margin: 0 auto;
   text-align: center;
   width: 400px;
 }
 
 .restart-button {
   text-align: center;
-  padding-top: 20px;
 }
 
 .restart:hover {

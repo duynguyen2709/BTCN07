@@ -68,7 +68,7 @@ export default function MoveHistory(props) {
         Danh sách nước đi
       </p>
 
-      <ReactTable style={{ height: '410px', border: '1px solid #c79e71' }}
+      <ReactTable style={{ height: '400px', border: '1px solid #c79e71' }}
                   data={props.data}
                   columns={MemoizedColumns}
                   noDataText=""

@@ -24,7 +24,7 @@ class Game extends React.Component {
     let text = <p>Lượt tiếp theo : {nextSymbol}</p>;
 
     if (this.props.win) {
-      text = <p style={{ color: 'red' }}>Người thắng: {currentSymbol}</p>;
+      text = <p style={{ color: 'red'}}>Người thắng: {currentSymbol}</p>;
     } else if (isBoardFull(this.props.totalChecked)) {
       text = <p>Hoà !</p>;
     }
@@ -48,7 +48,7 @@ class Game extends React.Component {
     this.props.onClickSquare(i, j);
 
     const rows = document.getElementsByClassName('rt-tr-group');
-    if (this.props.currentSelected >= 10) {
+    if (this.props.currentSelected >= 8) {
       rows[this.props.currentSelected + 1].scrollIntoView(false);
     } else {
       rows[0].scrollIntoView(false);
@@ -58,6 +58,12 @@ class Game extends React.Component {
   render() {
     return (
       <div className="container">
+        <a href="/" style={{
+          height:'100%',
+          fontSize: '20px'
+        }}>
+          Quay Lại Trang Chủ
+        </a>
         <div className="game">
           <div className="game-board">
             <Board row={this.props.BASE_ROW}

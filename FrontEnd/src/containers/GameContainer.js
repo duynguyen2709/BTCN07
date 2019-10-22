@@ -1,3 +1,4 @@
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import {initBoard, resetBoard, setCurrentSelected, onClickSquare} from '../actions/Actions';
 import Game from '../components/Game';
@@ -24,4 +25,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Game));
