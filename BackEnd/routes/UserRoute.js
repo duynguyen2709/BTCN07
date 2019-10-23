@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var UserController = require('../controllers/UserController');
-var jwt = require('jsonwebtoken');
-var passport = require('passport');
+const express = require('express');
+const router = express.Router();
+const UserController = require('../controllers/UserController');
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
 
 router.post('/user/register', UserController.registerUser);
 
@@ -23,7 +23,8 @@ router.post('/user/login', function (req, res, next) {
                 username: user.username
             }, '1612145');
             return res.json({
-                token
+                returnCode: 1,
+                token: token
             });
         });
     })(req, res);
@@ -34,9 +35,15 @@ router.get('/me', function (req, res, next) {
         session: false
     }, (err, user, info) => {
         if (err || !user) {
-            return res.send("JWT không hợp lệ.");
+            return res.json({
+                returnCode: -1,
+                message: "JWT không hợp lệ."
+            });
         }
-        return res.send("NGƯỜI DÙNG HIỆN TẠI: " + user);
+        return res.json({
+            returnCode: 1,
+            message: "NGƯỜI DÙNG HIỆN TẠI: " + user
+        });
     })(req, res, next);
 });
 

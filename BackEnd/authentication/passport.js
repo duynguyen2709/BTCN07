@@ -16,6 +16,7 @@ passport.use(new LocalStrategy({
             .then(user => {
                 if (!user) {
                     return cb(null, false, {
+                        returnCode: -1,
                         message: 'Không tìm thấy người dùng ' + username
                     });
                 }
@@ -23,10 +24,12 @@ passport.use(new LocalStrategy({
                 bcrypt.compare(password, user.password).then((res) => {
                     if (!res) {
                         return cb(null, false, {
+                            returnCode: -2,
                             message: 'Sai mật khẩu'
                         });
                     }
                     return cb(null, user, {
+                        returnCode: 1,
                         message: 'Đăng nhập thành công'
                     });
                 });

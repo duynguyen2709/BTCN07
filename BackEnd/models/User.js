@@ -15,7 +15,7 @@ module.exports.getUser = async (username) => {
         username: res[0].username,
         password: res[0].password
     };
-}
+};
 
 module.exports.createUser = async (username, password) => {
     var hash = bcrypt.hashSync(password, 8);
@@ -26,7 +26,7 @@ module.exports.createUser = async (username, password) => {
         })
         .then(([rows, fields]) => {
             return [rows, fields];
-        })
+        });
 
     return res;
-}
+};

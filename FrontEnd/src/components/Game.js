@@ -1,3 +1,4 @@
+import {Button} from "antd";
 import React from 'react';
 import '../index.css';
 import RestartButton from './RestartButton';
@@ -13,6 +14,7 @@ class Game extends React.Component {
     this.handleClickRestartButton = this.handleClickRestartButton.bind(this);
     this.handleOnClickSquare = this.handleOnClickSquare.bind(this);
     this.getStatus = this.getStatus.bind(this);
+    this.goBack = this.goBack.bind(this);
 
     props.initBoard();
   }
@@ -29,6 +31,10 @@ class Game extends React.Component {
       text = <p>Hoà !</p>;
     }
     return text;
+  }
+
+  goBack(){
+    this.props.history.goBack();
   }
 
   handleClickRestartButton() {
@@ -58,12 +64,11 @@ class Game extends React.Component {
   render() {
     return (
       <div className="container">
-        <a href="/" style={{
-          height:'100%',
-          fontSize: '20px'
-        }}>
-          {"\u003C"}=  Quay Lại Trang Chủ
-        </a>
+        <Button style={{width:'fit-content', fontWeight: 'bold'}}
+                type="primary"
+                onClick={this.goBack}>
+          {"\u003C"}= Trang Chủ
+        </Button>
         <div className="game">
           <div className="game-board">
             <Board row={this.props.BASE_ROW}

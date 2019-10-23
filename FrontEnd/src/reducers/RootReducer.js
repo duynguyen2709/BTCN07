@@ -17,7 +17,8 @@ const initialState = {
 
 function initBoard(state) {
 
-  let {baseRow, baseColumn} = {...state};
+  let baseRow = [];
+  let baseColumn = [];
 
   for (let i = 0; i < NO_OF_ROW; i++) {
     baseColumn = baseColumn.concat(i);
@@ -27,7 +28,16 @@ function initBoard(state) {
   return {
     ...state,
     baseRow,
-    baseColumn
+    baseColumn,
+
+    squares: Array(NO_OF_ROW).fill(Array(NO_OF_COL).fill(null)),
+    isXNext: true,
+    totalChecked: 0,
+    win: false,
+    historyMoves: [],
+    historySquares: [],
+    currentSelected: -1,
+    currentTurn: 0
   };
 }
 
@@ -77,7 +87,7 @@ export default function rootReducer(state = initialState, action){
 
   switch (action.type) {
     case ActionConstant.INIT_BOARD:
-      return initBoard(state);
+      return initBoard(initialState);
 
     case ActionConstant.SET_CURRENT_SELECTED:
       return {

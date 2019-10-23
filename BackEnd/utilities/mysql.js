@@ -8,6 +8,7 @@ nodeCleanup(function (exitCode, signal) {
         console.log("Cleanup Connection...");
         conn.end();
     }
+    process.exit();
 });
 
 module.exports.initConnection = async () => {
@@ -17,6 +18,6 @@ module.exports.initConnection = async () => {
         password: "1612145",
         database: "AdvancedWebDevelopment"
     });
-}
+};
 
 module.exports.getConnection = () => {return conn};
