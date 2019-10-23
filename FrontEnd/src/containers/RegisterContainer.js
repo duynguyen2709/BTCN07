@@ -1,21 +1,23 @@
+import {withRouter} from "react-router-dom";
+import {connect} from 'react-redux';
 import React from 'react';
 import RegisterForm from '../components/RegisterForm';
+import {register} from "../actions/ApiActions";
 
-class RegisterContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleRegister = this.handleRegister.bind(this);
-    }
-
-    handleRegister(username, password, retype){
-        console.log(username);
-        console.log(password);
-        console.log(retype);
-    }
-
-    render() {
-        return <RegisterForm errorText="test" onClickRegister={this.handleRegister}/>
-    }
+function RegisterContainer(props)  {
+    return <RegisterForm errorText={props.errorText} onClickRegister={props.register}/>
 }
 
-export default RegisterContainer;
+function mapStateToProps(state) {
+    return {
+        errorText: state.api.errorText
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        register: (username, password, retypePassword) => dispatch(register(username, password, retypePassword)),
+    };
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterContainer));

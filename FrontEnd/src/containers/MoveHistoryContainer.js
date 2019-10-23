@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { resetTable, setCurrentSelected } from '../actions/Actions';
+import { resetTable, setCurrentSelected } from '../actions/RootActions';
 import MoveHistory from '../components/MoveHistory';
 
 function mapStateToProps(state) {

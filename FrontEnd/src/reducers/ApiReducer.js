@@ -1,7 +1,10 @@
 import { ActionConstant } from '../utils/Constants';
 
 const initialState = {
-    error: ''
+    username: null,
+    loggedIn: false,
+    isLoading: false,
+    errorText: ''
 };
 
 export default function apiReducer(state = initialState, action){
@@ -10,7 +13,24 @@ export default function apiReducer(state = initialState, action){
         case ActionConstant.SET_ERROR:
             return {
                 ...state,
-                error: action.value
+                errorText: action.value
+            };
+        case ActionConstant.CALL_API_START:
+            return {
+                ...state,
+                errorText: '',
+                isLoading : true
+            };
+        case ActionConstant.LOGIN_SUCCESS:
+            return {
+                ...state,
+                isLoading : false,
+                errorText: '',
+                loggedIn: true
+            };
+        case ActionConstant.LOGOUT:
+            return {
+                ...initialState
             };
 
         default :

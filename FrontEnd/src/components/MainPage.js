@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom';
 import 'antd/dist/antd.css';
 import '../index.css';
 
-const MainPage = React.memo(() => {
+const MainPage = ({onClickLogout}) => {
     const history = useHistory();
 
     return <Row type="flex" justify="center">
@@ -29,11 +29,12 @@ const MainPage = React.memo(() => {
                 type="info"
                 htmlType="button"
                 className="horizontal-center"
+                onClick={onClickLogout}
             >
                 Đăng Xuất
             </Button>
         </Col>
     </Row>
-});
+};
 
 export default MainPage;

@@ -1,20 +1,29 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {Redirect, withRouter} from 'react-router-dom'
 import LoginPage from "../components/LoginForm";
+import {login} from "../actions/ApiActions";
 
-class LoginContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleLogin = this.handleLogin.bind(this);
-    }
+function LoginContainer(props) {
+    const token = localStorage.getItem("token");
 
-    handleLogin(username, password){
-        console.log(username);
-        console.log(password);
-    }
+    if ((token != null && token !== '') || props.loggedIn)
+        return <Redirect to="/" />;
 
-    render() {
-        return <LoginPage errorText="test" onClickLogin={this.handleLogin}/>
-    }
+    return <LoginPage errorText={props.errorText} onClickLogin={props.login}/>;
 }
 
-export default LoginContainer;
+function mapStateToProps(state) {
+    return {
+        errorText: state.api.errorText,
+        loggedIn: state.api.loggedIn
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        login: (username, password) => dispatch(login(username, password)),
+    };
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginContainer));
