@@ -8,6 +8,13 @@ function setErrorText(value) {
     }
 }
 
+function setUsername(username) {
+    return {
+        type: ActionConstant.SET_USERNAME,
+        username
+    }
+}
+
 function callApiStart() {
     return {
         type: ActionConstant.CALL_API_START
@@ -20,9 +27,61 @@ function loginSuccess() {
     };
 }
 
-export const login = (username, password) => {
+export const register = (username, password, retypePassword) => {
+    return (dispatch, getState) => {
+        if (password !== retypePassword)
+            return dispatch(setErrorText('Mật khẩu không khớp. Vui lòng nhập lại'));
 
-    return dispatch => {
+        if (getState().api.isLoading)
+            return null;
+
+        dispatch(callApiStart());
+
+        return axios.post('http://localhost:3001/user/register', {
+            username,
+            password
+        }).then(data => data.data)
+            .then(data => {
+                dispatch(setErrorText(data.message));
+        }).catch(err => dispatch(setErrorText(err)));
+    }
+};
+
+export const getUsername = () => {
+    return (dispatch, getState) => {
+        const {username} = getState().api;
+        if (username != null && username !== '')
+            return null;
+
+        const token = localStorage.getItem("token");
+        dispatch(callApiStart());
+
+        return axios.get('http://localhost:3001/me',
+            { headers: {"Authorization" : `Bearer ${token}`} })
+            .then(data => data.data)
+            .then(data => {
+                if (data.returnCode === 1) {
+                    dispatch(setUsername(data.message));
+                } else {
+                    dispatch(setErrorText(data.message));
+                }
+            }).catch(err => dispatch(setErrorText(err)));
+    }
+};
+
+export function logout () {
+    localStorage.removeItem("token");
+    return {
+        type: ActionConstant.LOGOUT
+    }
+}
+
+
+export const login = (username, password) => {
+    return (dispatch, getState) => {
+        if (getState().api.isLoading)
+            return null;
+
         dispatch(callApiStart());
 
         return axios.post('http://localhost:3001/user/login', {
@@ -39,35 +98,3 @@ export const login = (username, password) => {
             }).catch(err => dispatch(setErrorText(err)));
     };
 };
-
-export const register = (username, password, retypePassword) => {
-    return dispatch => {
-        if (password !== retypePassword)
-            return dispatch(setErrorText('Mật khẩu không khớp. Vui lòng nhập lại'));
-
-        dispatch(callApiStart());
-
-        return axios.post('http://localhost:3001/user/register', {
-            username,
-            password
-        }).then(data => data.data)
-            .then(data => {
-                dispatch(setErrorText(data.message));
-        }).catch(err => dispatch(setErrorText(err)));
-    }
-};
-
-export const getUsername = () => {
-    return (dispatch, getState) => {
-        console.log(getState());
-
-        return dispatch(callApiStart());
-    }
-};
-
-export function logout () {
-    localStorage.removeItem("token");
-    return {
-        type: ActionConstant.LOGOUT
-    }
-}

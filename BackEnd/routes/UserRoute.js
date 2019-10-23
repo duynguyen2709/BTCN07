@@ -42,7 +42,7 @@ router.get('/me', function (req, res, next) {
         }
         return res.json({
             returnCode: 1,
-            message: "NGƯỜI DÙNG HIỆN TẠI: " + user
+            message: user
         });
     })(req, res, next);
 });

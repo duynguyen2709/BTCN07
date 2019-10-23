@@ -13,7 +13,16 @@ export default function apiReducer(state = initialState, action){
         case ActionConstant.SET_ERROR:
             return {
                 ...state,
-                errorText: action.value
+                errorText: action.value,
+                isLoading: false
+            };
+        case ActionConstant.SET_USERNAME:
+            return {
+                ...state,
+                username: action.username,
+                isLoading : false,
+                errorText: '',
+                loggedIn: true
             };
         case ActionConstant.CALL_API_START:
             return {
