@@ -37,7 +37,7 @@ export const register = (username, password, retypePassword) => {
 
         dispatch(callApiStart());
 
-        return axios.post('http://localhost:3001/user/register', {
+        return axios.post(`${process.env.REACT_APP_BACKEND_URL}user/register`, {
             username,
             password
         }).then(data => data.data)
@@ -56,7 +56,7 @@ export const getUsername = () => {
         const token = localStorage.getItem("token");
         dispatch(callApiStart());
 
-        return axios.get('http://localhost:3001/me',
+        return axios.get(`${process.env.REACT_APP_BACKEND_URL}me`,
             { headers: {"Authorization" : `Bearer ${token}`} })
             .then(data => data.data)
             .then(data => {
@@ -84,7 +84,7 @@ export const login = (username, password) => {
 
         dispatch(callApiStart());
 
-        return axios.post('http://localhost:3001/user/login', {
+        return axios.post(`${process.env.REACT_APP_BACKEND_URL}user/login`, {
             username,
             password
         }).then(data => data.data)
